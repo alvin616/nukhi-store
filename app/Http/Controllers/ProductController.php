@@ -2,69 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    // tampilkan semua produk
     public function index()
     {
-        $products = Product::latest()->get();
-        return view('products.index', compact('products'));
+        return 'Laravel berhasil berjalan';
     }
 
-    // form tambah produk
     public function create()
     {
-        return view('products.create');
+        return 'Halaman Create';
     }
 
-    // simpan produk baru
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'category' => 'required',
-            'price' => 'required|numeric',
-            'stock' => 'required|numeric',
-        ]);
-
-        Product::create($request->all());
-
-        return redirect()->route('products.index')
-                        ->with('success', 'Produk berhasil ditambahkan');
+        return 'Store berhasil';
     }
 
-    // form edit produk
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
-        return view('products.edit', compact('product'));
+        return 'Edit produk ID: ' . $id;
     }
 
-    // update produk
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'category' => 'required',
-            'price' => 'required|numeric',
-            'stock' => 'required|numeric',
-        ]);
-
-        $product = Product::findOrFail($id);
-        $product->update($request->all());
-
-        return redirect()->route('products.index')
-                        ->with('success', 'Produk berhasil diperbarui');
+        return 'Update produk ID: ' . $id;
     }
 
-    // hapus produk
     public function destroy($id)
     {
-        Product::findOrFail($id)->delete();
-        return redirect()->route('products.index')
-                        ->with('success', 'Produk berhasil dihapus');
+        return 'Hapus produk ID: ' . $id;
     }
 }
