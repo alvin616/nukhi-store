@@ -7,9 +7,15 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function index()
-    {
-        return 'Laravel berhasil berjalan';
+{
+    try {
+        $count = \Illuminate\Support\Facades\DB::table('products')->count();
+
+        return "Database terkoneksi. Jumlah produk: " . $count;
+    } catch (\Exception $e) {
+        return $e->getMessage();
     }
+}
 
     public function create()
     {
